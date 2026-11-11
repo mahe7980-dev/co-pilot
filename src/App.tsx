@@ -743,249 +743,224 @@ export default function App() {
           </div>
         ) : (
           <div
-            className={`flex-1 flex flex-col overflow-hidden transition-all duration-300 ${
+            className={`flex-1 flex overflow-hidden transition-all duration-300 ${
               isWindowMaximized
                 ? 'rounded-none border-0 shadow-none'
                 : isLight
-                ? 'rounded-2xl border border-slate-300/80 ring-1 ring-black/10 shadow-[0_25px_70px_rgba(0,0,0,0.22)] bg-white'
-                : 'rounded-2xl border border-white/15 ring-1 ring-black/60 shadow-[0_30px_90px_rgba(0,0,0,0.85)] bg-[#0a0d14]'
+                ? 'rounded-2xl border border-[#cfd8ea] ring-1 ring-black/5 shadow-[0_25px_70px_rgba(15,23,42,0.18)]'
+                : 'rounded-2xl border border-white/15 ring-1 ring-black/60 shadow-[0_30px_90px_rgba(0,0,0,0.85)]'
+            } ${
+              isLight
+                ? 'bg-gradient-to-b from-[#dfe6f4] via-[#e7edf8] to-[#eef2fa]'
+                : 'bg-[#0a0d14]'
             }`}
           >
-            {/* Window Chrome Title Bar */}
-            <header
-              className={`h-11 sm:h-12 border-b px-3 sm:px-4 flex items-center justify-between shrink-0 shadow-xs transition-colors duration-200 relative z-30 ${
-                isLight
-                  ? 'bg-[#eaedf4] border-[#d4d8e4] text-slate-800'
-                  : 'bg-[#12151d] border-[#1f2535] text-slate-200'
-              }`}
-            >
-              {/* Left: macOS Traffic Lights, Title & Left-aligned Top Navigation */}
-              <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
-                {/* Traffic Lights */}
-                <div className="flex items-center gap-2 group mr-1">
-                  <button
-                    onClick={() => setIsWindowMaximized(false)}
-                    className="w-3 h-3 rounded-full bg-[#ff5f56] border border-[#e0443e] hover:opacity-90 flex items-center justify-center transition cursor-pointer"
-                    title="关闭"
-                  >
-                    <span className="opacity-0 group-hover:opacity-100 text-[8px] leading-none text-[#700000] font-black">×</span>
-                  </button>
-                  <button
-                    className="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#dea123] hover:opacity-90 flex items-center justify-center transition cursor-pointer"
-                    title="最小化"
-                  >
-                    <span className="opacity-0 group-hover:opacity-100 text-[8px] leading-none text-[#704800] font-black">-</span>
-                  </button>
-                  <button
-                    onClick={() => setIsWindowMaximized(!isWindowMaximized)}
-                    className="w-3 h-3 rounded-full bg-[#27c93f] border border-[#1aab29] hover:opacity-90 flex items-center justify-center transition cursor-pointer"
-                    title={isWindowMaximized ? '退出全屏 (还原窗口)' : '全屏 (最大化)'}
-                  >
-                    <span className="opacity-0 group-hover:opacity-100 text-[6px] leading-none text-[#004f0d] font-black">+</span>
-                  </button>
-                </div>
-
-                <div className={`h-4 w-px mx-0.5 sm:mx-1 ${isLight ? 'bg-slate-300' : 'bg-slate-700/60'}`}></div>
-
-                {/* Window Title */}
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 rounded bg-[#008aff] flex items-center justify-center text-white text-[9px] font-bold shadow-xs">
-                    AI
-                  </div>
-                  <span className={`font-semibold text-xs tracking-tight ${isLight ? 'text-slate-900' : 'text-slate-200'}`}>
-                    Co-Pilot
-                  </span>
-                </div>
-
-                {/* Left-aligned Top Navigation Tabs (招聘 / 岗位 / 候选人 / 数据) */}
-                <div className={`h-4 w-px mx-1 ${isLight ? 'bg-slate-300' : 'bg-slate-700/60'}`} />
-                <nav className="flex items-center gap-1 bg-slate-200/75 p-1 rounded-xl border border-slate-300/70">
-                  <button
-                    onClick={() => setActiveView('recruit')}
-                    className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                      activeView === 'recruit'
-                        ? 'bg-white text-blue-600 shadow-xs'
-                        : 'text-slate-600 hover:text-slate-900'
-                    }`}
-                  >
-                    <Globe className="w-3.5 h-3.5" />
-                    <span>招聘</span>
-                  </button>
-
-                  <button
-                    onClick={() => setActiveView('jobs')}
-                    className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                      activeView === 'jobs'
-                        ? 'bg-white text-purple-600 shadow-xs'
-                        : 'text-slate-600 hover:text-slate-900'
-                    }`}
-                  >
-                    <Briefcase className="w-3.5 h-3.5" />
-                    <span>岗位</span>
-                  </button>
-
-                  <button
-                    onClick={() => setActiveView('candidates')}
-                    className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                      activeView === 'candidates'
-                        ? 'bg-white text-sky-600 shadow-xs'
-                        : 'text-slate-600 hover:text-slate-900'
-                    }`}
-                  >
-                    <Users className="w-3.5 h-3.5" />
-                    <span>候选人</span>
-                  </button>
-
-                  <button
-                    onClick={() => setActiveView('analytics')}
-                    className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                      activeView === 'analytics'
-                        ? 'bg-white text-emerald-600 shadow-xs'
-                        : 'text-slate-600 hover:text-slate-900'
-                    }`}
-                  >
-                    <BarChart2 className="w-3.5 h-3.5" />
-                    <span>数据</span>
-                  </button>
-                </nav>
+            {/* 左侧大底导航栏 (直接置于大底之上：顶部红黄绿控制点 + 用户头像菜单 + 招聘/岗位/候选人/数据导航) */}
+            <aside className="w-[60px] shrink-0 flex flex-col items-center py-2.5 px-1 select-none relative z-30">
+              {/* macOS Traffic Lights */}
+              <div className="flex items-center gap-1.5 group mb-4">
+                <button
+                  onClick={() => setIsWindowMaximized(false)}
+                  className="w-3 h-3 rounded-full bg-[#ff5f56] border border-[#e0443e] hover:opacity-90 flex items-center justify-center transition cursor-pointer"
+                  title="关闭"
+                >
+                  <span className="opacity-0 group-hover:opacity-100 text-[8px] leading-none text-[#700000] font-black">×</span>
+                </button>
+                <button
+                  className="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#dea123] hover:opacity-90 flex items-center justify-center transition cursor-pointer"
+                  title="最小化"
+                >
+                  <span className="opacity-0 group-hover:opacity-100 text-[8px] leading-none text-[#704800] font-black">-</span>
+                </button>
+                <button
+                  onClick={() => setIsWindowMaximized(!isWindowMaximized)}
+                  className="w-3 h-3 rounded-full bg-[#27c93f] border border-[#1aab29] hover:opacity-90 flex items-center justify-center transition cursor-pointer"
+                  title={isWindowMaximized ? '退出全屏 (还原窗口)' : '全屏 (最大化)'}
+                >
+                  <span className="opacity-0 group-hover:opacity-100 text-[6px] leading-none text-[#004f0d] font-black">+</span>
+                </button>
               </div>
 
-              {/* Right Window Controls */}
-              <div className="flex items-center gap-2">
-                {/* 人物名称下拉展开 (保留右上角下拉里的下线设置和退出登录) */}
-                <div ref={userMenuRef} className="relative">
-                  <button
-                    onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                    className={`flex items-center gap-1.5 px-2 py-1 rounded-lg transition cursor-pointer select-none border ${
-                      isUserMenuOpen
-                        ? 'bg-slate-200/90 border-slate-300 text-slate-900 shadow-xs'
-                        : 'hover:bg-slate-200/60 border-transparent text-slate-700'
-                    }`}
-                    title="点击展开操作菜单"
-                  >
-                    <div className="w-6 h-6 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-600 flex items-center justify-center font-bold text-[10px]">
-                      {currentUser.name.slice(0, 1)}
-                    </div>
-                    <div className="hidden sm:flex flex-col text-left">
-                      <span className="text-[11px] font-semibold leading-none text-slate-800">
-                        {currentUser.name}
-                      </span>
-                      <span className="text-[9px] text-slate-400 font-mono">
-                        {currentUser.phone}
-                      </span>
-                    </div>
-                    <ChevronDown
-                      className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${
-                        isUserMenuOpen ? 'rotate-180 text-blue-600' : ''
-                      }`}
-                    />
-                  </button>
+              {/* 用户圆形头像与点击弹出菜单 (保留下线设置与退出登录) */}
+              <div ref={userMenuRef} className="relative mb-5">
+                <button
+                  onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                  className="w-10 h-10 rounded-full bg-gradient-to-br from-[#2b85ff] to-[#1a66ff] text-white font-bold text-xs flex items-center justify-center shadow-sm hover:opacity-95 transition cursor-pointer ring-2 ring-white/80 relative"
+                  title={`${currentUser.name} (${currentUser.phone}) · 点击展开设置`}
+                >
+                  {currentUser.name.slice(0, 2)}
+                  <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-[#e4eaf6]" />
+                </button>
 
-                  {/* 下拉展开菜单 */}
-                  {isUserMenuOpen && (
-                    <div className="absolute right-0 top-full mt-1.5 w-56 rounded-xl bg-white border border-slate-200 shadow-2xl py-1.5 z-50 text-xs animate-in fade-in zoom-in-95">
-                      {/* 登录人物基本信息 */}
-                      <div className="px-3 py-2 border-b border-slate-100 flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs border border-blue-200 shrink-0">
-                          {currentUser.name.slice(0, 1)}
-                        </div>
-                        <div className="flex flex-col min-w-0">
-                          <div className="flex items-center gap-1.5">
-                            <span className="font-semibold text-slate-800 truncate">{currentUser.name}</span>
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" title="在线中" />
-                          </div>
-                          <span className="text-[10px] text-slate-400 font-mono">{currentUser.phone}</span>
-                        </div>
+                {/* 下拉展开菜单 */}
+                {isUserMenuOpen && (
+                  <div className="absolute left-full top-0 ml-2 w-56 rounded-2xl bg-white border border-slate-200/90 shadow-2xl py-1.5 z-50 text-xs animate-in fade-in zoom-in-95">
+                    {/* 登录人物基本信息 */}
+                    <div className="px-3 py-2.5 border-b border-slate-100 flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs border border-blue-200 shrink-0">
+                        {currentUser.name.slice(0, 1)}
                       </div>
+                      <div className="flex flex-col min-w-0">
+                        <div className="flex items-center gap-1.5">
+                          <span className="font-semibold text-slate-800 truncate">{currentUser.name}</span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" title="在线中" />
+                        </div>
+                        <span className="text-[10px] text-slate-400 font-mono">{currentUser.phone}</span>
+                      </div>
+                    </div>
 
-                      {/* 下拉选项 1: 下线设置 */}
-                      <div className="p-1">
-                        <button
-                          onClick={() => {
-                            setIsUserMenuOpen(false);
-                            setIsLoopOfflineModalOpen(true);
-                          }}
-                          className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 transition cursor-pointer"
-                        >
-                          <div className="flex items-center gap-2">
-                            <Settings className="w-4 h-4 text-indigo-500" />
-                            <span className="font-medium">下线设置</span>
-                          </div>
-                          <span
-                            className={`text-[10px] px-1.5 py-0.5 rounded-md font-medium ${
-                              loopOfflineConfig.isOffline
-                                ? 'bg-rose-50 text-rose-600 border border-rose-200'
-                                : loopOfflineConfig.scheduledOfflineEnabled
-                                ? 'bg-indigo-50 text-indigo-600 border border-indigo-200'
-                                : 'bg-slate-100 text-slate-500'
-                            }`}
-                          >
-                            {loopOfflineConfig.isOffline
-                              ? '已下线'
+                    {/* 下拉选项 1: 下线设置 */}
+                    <div className="p-1">
+                      <button
+                        onClick={() => {
+                          setIsUserMenuOpen(false);
+                          setIsLoopOfflineModalOpen(true);
+                        }}
+                        className="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 transition cursor-pointer"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Settings className="w-4 h-4 text-indigo-500" />
+                          <span className="font-medium">下线设置</span>
+                        </div>
+                        <span
+                          className={`text-[10px] px-1.5 py-0.5 rounded-md font-medium ${
+                            loopOfflineConfig.isOffline
+                              ? 'bg-rose-50 text-rose-600 border border-rose-200'
                               : loopOfflineConfig.scheduledOfflineEnabled
-                              ? '已设定时'
-                              : '未开启'}
-                          </span>
-                        </button>
-                      </div>
-
-                      <div className="h-px bg-slate-100 my-1 mx-2" />
-
-                      {/* 下拉选项 2: 退出登录 */}
-                      <div className="p-1">
-                        <button
-                          onClick={() => {
-                            setIsUserMenuOpen(false);
-                            handleLogout();
-                          }}
-                          className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-rose-600 hover:bg-rose-50 transition cursor-pointer"
+                              ? 'bg-indigo-50 text-indigo-600 border border-indigo-200'
+                              : 'bg-slate-100 text-slate-500'
+                          }`}
                         >
-                          <LogOut className="w-4 h-4 text-rose-500" />
-                          <span className="font-medium">退出登录</span>
-                        </button>
-                      </div>
+                          {loopOfflineConfig.isOffline
+                            ? '已下线'
+                            : loopOfflineConfig.scheduledOfflineEnabled
+                            ? '已设定时'
+                            : '未开启'}
+                        </span>
+                      </button>
                     </div>
-                  )}
-                </div>
-              </div>
-            </header>
 
-            {/* Window Body: 4 Top-Nav Pages */}
-            <div className="flex-1 flex overflow-hidden">
-              {/* 页面 1：「招聘」—— 展示左侧岗位列表和右侧独立网页模拟内容 */}
-              {activeView === 'recruit' && (
-                <>
-                  <OrbitSidebar
-                    jobs={jobs}
-                    selectedJobId={selectedJobId}
-                    onSelectJob={(id) => setSelectedJobId(id)}
-                    onOpenJobDetail={(job) => setDrawerJob(job)}
-                    onOpenNewJob={() => setIsNewJobOpen(true)}
-                    onOpenSyncJob={() => setIsJobSyncModalOpen(true)}
+                    <div className="h-px bg-slate-100 my-1 mx-2" />
+
+                    {/* 下拉选项 2: 退出登录 */}
+                    <div className="p-1">
+                      <button
+                        onClick={() => {
+                          setIsUserMenuOpen(false);
+                          handleLogout();
+                        }}
+                        className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-rose-600 hover:bg-rose-50 transition cursor-pointer"
+                      >
+                        <LogOut className="w-4 h-4 text-rose-500" />
+                        <span className="font-medium">退出登录</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* 左侧垂直导航项：招聘 / 岗位 / 候选人 / 数据 */}
+              <nav className="flex flex-col items-center gap-2 w-full">
+                <button
+                  onClick={() => setActiveView('recruit')}
+                  className={`w-[54px] py-2 rounded-xl flex flex-col items-center justify-center gap-1 transition-all cursor-pointer ${
+                    activeView === 'recruit'
+                      ? 'bg-white text-blue-600 shadow-[0_2px_8px_rgba(15,23,42,0.06)] font-bold'
+                      : 'text-slate-600 hover:bg-white/50 hover:text-slate-900 font-medium'
+                  }`}
+                >
+                  <Globe className={`w-4 h-4 ${activeView === 'recruit' ? 'text-blue-600' : 'text-slate-500'}`} />
+                  <span className="text-[11px] leading-none">招聘</span>
+                </button>
+
+                <button
+                  onClick={() => setActiveView('jobs')}
+                  className={`w-[54px] py-2 rounded-xl flex flex-col items-center justify-center gap-1 transition-all cursor-pointer relative ${
+                    activeView === 'jobs'
+                      ? 'bg-white text-blue-600 shadow-[0_2px_8px_rgba(15,23,42,0.06)] font-bold'
+                      : 'text-slate-600 hover:bg-white/50 hover:text-slate-900 font-medium'
+                  }`}
+                >
+                  <Briefcase className={`w-4 h-4 ${activeView === 'jobs' ? 'text-blue-600' : 'text-slate-500'}`} />
+                  <span className="text-[11px] leading-none">岗位</span>
+                </button>
+
+                <button
+                  onClick={() => setActiveView('candidates')}
+                  className={`w-[54px] py-2 rounded-xl flex flex-col items-center justify-center gap-1 transition-all cursor-pointer ${
+                    activeView === 'candidates'
+                      ? 'bg-white text-blue-600 shadow-[0_2px_8px_rgba(15,23,42,0.06)] font-bold'
+                      : 'text-slate-600 hover:bg-white/50 hover:text-slate-900 font-medium'
+                  }`}
+                >
+                  <Users className={`w-4 h-4 ${activeView === 'candidates' ? 'text-blue-600' : 'text-slate-500'}`} />
+                  <span className="text-[11px] leading-none">候选人</span>
+                </button>
+
+                <button
+                  onClick={() => setActiveView('analytics')}
+                  className={`w-[54px] py-2 rounded-xl flex flex-col items-center justify-center gap-1 transition-all cursor-pointer ${
+                    activeView === 'analytics'
+                      ? 'bg-white text-blue-600 shadow-[0_2px_8px_rgba(15,23,42,0.06)] font-bold'
+                      : 'text-slate-600 hover:bg-white/50 hover:text-slate-900 font-medium'
+                  }`}
+                >
+                  <BarChart2 className={`w-4 h-4 ${activeView === 'analytics' ? 'text-blue-600' : 'text-slate-500'}`} />
+                  <span className="text-[11px] leading-none">数据</span>
+                </button>
+              </nav>
+
+              {/* 底部下线快捷按钮 */}
+              <div className="mt-auto pt-2 flex flex-col items-center gap-2">
+                <button
+                  onClick={() => setIsLoopOfflineModalOpen(true)}
+                  className={`w-9 h-9 rounded-xl flex items-center justify-center transition cursor-pointer ${
+                    loopOfflineConfig.isOffline
+                      ? 'bg-rose-100 text-rose-600'
+                      : 'text-slate-500 hover:bg-white/60 hover:text-slate-800'
+                  }`}
+                  title="下线设置"
+                >
+                  <Settings className="w-4 h-4" />
+                </button>
+              </div>
+            </aside>
+
+            {/* 右侧工作区：两个独立的圆角白底容器 (大底 + 两个圆角白底，边距 6px) */}
+            <div className="flex-1 flex gap-1.5 p-1.5 pl-0 overflow-hidden">
+              {/* 第 1 个圆角白底：左侧岗位列表 */}
+              <OrbitSidebar
+                jobs={jobs}
+                selectedJobId={selectedJobId}
+                onSelectJob={(id) => setSelectedJobId(id)}
+                onOpenJobDetail={(job) => setDrawerJob(job)}
+                onOpenNewJob={() => setIsNewJobOpen(true)}
+                onOpenSyncJob={() => setIsJobSyncModalOpen(true)}
+                theme={theme}
+              />
+
+              {/* 第 2 个圆角白底：右侧主内容区 */}
+              <div className="flex-1 flex flex-col min-w-0 overflow-hidden bg-white rounded-lg shadow-[0_1px_6px_rgba(15,23,42,0.03)] border border-white/90">
+                {/* 页面 1：「招聘」—— 独立网页模拟内容 */}
+                {activeView === 'recruit' && (
+                  <YupaoBrowser
+                    currentJob={currentJob}
+                    candidates={jobCandidates}
+                    activeCandidate={activeCandidate}
+                    onSelectCandidate={setActiveCandidate}
+                    isChatOpen={isChatOpen}
+                    onToggleChat={setIsChatOpen}
+                    chatMessages={chatMessages}
+                    onSendMessage={handleSendMessage}
+                    isInspectingResume={isInspectingResume}
+                    onToggleResume={setIsInspectingResume}
+                    automationStepId={steps[currentStepIndex]?.id || 1}
                     theme={theme}
                   />
-                  <div className="flex-1 flex flex-col min-w-0 overflow-hidden bg-white">
-                    <YupaoBrowser
-                      currentJob={currentJob}
-                      candidates={jobCandidates}
-                      activeCandidate={activeCandidate}
-                      onSelectCandidate={setActiveCandidate}
-                      isChatOpen={isChatOpen}
-                      onToggleChat={setIsChatOpen}
-                      chatMessages={chatMessages}
-                      onSendMessage={handleSendMessage}
-                      isInspectingResume={isInspectingResume}
-                      onToggleResume={setIsInspectingResume}
-                      automationStepId={steps[currentStepIndex]?.id || 1}
-                      theme={theme}
-                    />
-                  </div>
-                </>
-              )}
+                )}
 
-              {/* 页面 2：「岗位」 */}
-              {activeView === 'jobs' && (
-                <div className="flex-1 flex flex-col min-w-0 overflow-hidden bg-white">
+                {/* 页面 2：「岗位」 */}
+                {activeView === 'jobs' && (
                   <JobManagementView
                     jobs={jobs}
                     selectedJobId={selectedJobId}
@@ -999,12 +974,10 @@ export default function App() {
                     onClearLogs={() => setTraceLogs([])}
                     theme={theme}
                   />
-                </div>
-              )}
+                )}
 
-              {/* 页面 3：「候选人」 */}
-              {activeView === 'candidates' && (
-                <div className="flex-1 flex flex-col min-w-0 overflow-hidden bg-white">
+                {/* 页面 3：「候选人」 */}
+                {activeView === 'candidates' && (
                   <CandidatePoolView
                     jobs={jobs}
                     selectedJobId={selectedJobId}
@@ -1016,12 +989,10 @@ export default function App() {
                     onSwitchToBrowser={() => setActiveView('recruit')}
                     theme={theme}
                   />
-                </div>
-              )}
+                )}
 
-              {/* 页面 4：「数据」 */}
-              {activeView === 'analytics' && (
-                <div className="flex-1 flex flex-col min-w-0 overflow-hidden bg-white">
+                {/* 页面 4：「数据」 */}
+                {activeView === 'analytics' && (
                   <RecruitmentAnalyticsView
                     jobs={jobs}
                     searchedCount={recruitmentMetrics.searchedCount}
@@ -1029,8 +1000,8 @@ export default function App() {
                     contactsCapturedCount={recruitmentMetrics.contactsCapturedCount}
                     theme={theme}
                   />
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
         )}

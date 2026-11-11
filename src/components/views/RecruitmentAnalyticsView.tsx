@@ -131,7 +131,7 @@ export const RecruitmentAnalyticsView: React.FC<RecruitmentAnalyticsViewProps> =
   return (
     <div
       className={`flex-1 flex flex-col h-full overflow-y-auto p-6 select-none transition-colors ${
-        isLight ? 'bg-[#f4f6fa] text-slate-800' : 'bg-[#0a0d14] text-slate-100'
+        isLight ? 'bg-white text-slate-800' : 'bg-[#0a0d14] text-slate-100'
       }`}
     >
       {/* 头部标题与时间筛选 */}

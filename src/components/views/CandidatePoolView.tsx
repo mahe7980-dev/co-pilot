@@ -117,7 +117,7 @@ export const CandidatePoolView: React.FC<CandidatePoolViewProps> = ({
   return (
     <div
       className={`flex-1 flex flex-col h-full overflow-hidden select-none relative transition-colors ${
-        isLight ? 'bg-[#f4f6fa] text-slate-800' : 'bg-[#0a0d14] text-slate-100'
+        isLight ? 'bg-white text-slate-800' : 'bg-[#0a0d14] text-slate-100'
       }`}
     >
       {/* 1. 顶部公共导航栏：候选人标题 + 岗位下拉切换 + 搜索与筛选 */}
