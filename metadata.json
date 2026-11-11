@@ -1,0 +1,6 @@
+{
+  "name": "AI Recruitment",
+  "description": "AI Recruitment 鱼泡直聘智能招聘桌面端，支持岗位管理、简历客观初筛、个性化打招呼与微聊意图解析全流程自动化。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
